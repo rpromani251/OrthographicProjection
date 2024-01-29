@@ -16,6 +16,8 @@ public class Application extends JPanel {
     // Rotation Stuff:
     private final double ANGLE = .025;
     public boolean rotation;
+    public boolean lines;
+    public boolean points;
 
     // Class Declarations
     private Shape currentShape;
@@ -28,6 +30,7 @@ public class Application extends JPanel {
         // Set Default Values:
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+
         rotation = false; // change 
 
         // Create instance of cube:
@@ -95,6 +98,16 @@ public class Application extends JPanel {
     // Toggle Rotation
     public void toggleRotation() {
         rotation = !rotation;
+    }
+
+    // Toggle Points
+    public void togglePoints() {
+        Shape.point = !Shape.point;
+    }
+
+    // Toggle Lines
+    public void toggleLines() {
+        Shape.line = !Shape.line;
     }
 
     // Increment Point Size

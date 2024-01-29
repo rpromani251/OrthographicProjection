@@ -10,36 +10,44 @@ public class Sphere extends Shape {
         super(FRAME_WIDTH, FRAME_HEIGHT);
 
         final double RADIUS = FRAME_WIDTH * 0.125;
+        final double THETA = 2*Math.PI/25;
 
-        points = new Point[26];
+        points = new Point[51];
 
-        // Approximating Circle using Euler's Method:
-        double x = FRAME_WIDTH / 2.0; // x0 = center of window
-        double y = FRAME_HEIGHT / 2.0 - RADIUS; // y0 = center of window + height of radius
-        double dydx = 0;
+        double deltaX = RADIUS / 5;
+        double x = FRAME_WIDTH / 2.0 - deltaX / 2; // x0 = center of window
+        double y = FRAME_HEIGHT / 2.0 - RADIUS + deltaX; // y0 = center of window + height of radius
+
+        for (int i = 0; i < 25; i++) { 
+
+            y += deltaX * Math.sin(i*THETA);
+            x += deltaX * Math.cos(i*THETA);
+
+            points[i+25] = new Point(x, y, 0);
+        }
+
+        double z = FRAME_HEIGHT / 2.0 - RADIUS + deltaX; // y0 = center of window + height of radius
+        y = FRAME_HEIGHT / 2.0; // y0 = center of window + height of radius
+        x = FRAME_WIDTH / 2.0 - deltaX / 2; // x0 = center of window
 
         for (int i = 0; i < 25; i++) {
 
+            z += deltaX * Math.sin(i*THETA);
+            x += deltaX * Math.cos(i*THETA);
 
-            x += (RADIUS / 25.0); // 25 Steps --> Add 1/25 of radius each step
-            y += Math.sqrt(RADIUS*RADIUS - x*x); // 25 Steps --> Add 1/25 of 
+            points[i] = new Point(x, y, z);
+        }
 
-            points[i] = new Point(x, y, 0);
-        } 
+        points[50] = new Point(FRAME_WIDTH / 2.0, FRAME_HEIGHT / 2.0, 0);
 
-        points[25] = new Point(FRAME_WIDTH / 2.0, FRAME_HEIGHT / 2.0, 0);
+        lines = new Line[25];
 
-        lines = new Line[8];
+        for (int i = 0; i < lines.length - 1; i++) {
+            lines[i] = new Line(points[i], points[i+1]);
+        }
 
-        lines[0] = new Line(points[0], points[1]);
-        lines[1] = new Line(points[1], points[2]);
-        lines[2] = new Line(points[2], points[3]);
-        lines[3] = new Line(points[3], points[0]);
-
-        lines[4] = new Line(points[0], points[4]);
-        lines[5] = new Line(points[1], points[4]);
-        lines[6] = new Line(points[2], points[4]);
-        lines[7] = new Line(points[3], points[4]);
+        lines[24] = new Line(points[24], points[0]);
+        
     }
 
     // Rotation Method

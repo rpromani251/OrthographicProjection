@@ -52,6 +52,22 @@ public class Main {
                 });
                 functionMenu.add(decrementPointSize);
 
+                JMenuItem toggleLines = new JMenuItem("Toggle Lines");
+                toggleLines.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        app.toggleLines();
+                    }
+                });
+                functionMenu.add(toggleLines);
+
+                JMenuItem togglePoints = new JMenuItem("Toggle Points");
+                togglePoints.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        app.togglePoints();
+                    }
+                });
+                functionMenu.add(togglePoints);
+
                 /*-------------------------- Add Shapes to the Menu Bar -------------------------- */
 
                 JMenuItem cubeItem = new JMenuItem("Cube");

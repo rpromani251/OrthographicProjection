@@ -9,8 +9,13 @@ public class Shape {
     protected Line[] lines;
     protected double depth;
 
+    public static boolean line, point;
+
     public Shape(int FRAME_WIDTH, int FRAME_HEIGHT) {
         depth = FRAME_WIDTH / 4;
+        line = true;
+        point = true;
+
     }
     // Rotation Method
     public void Rotate(double angle) {
@@ -63,10 +68,12 @@ public class Shape {
     // Draw Method
     public void draw(Graphics g) {
         for (Point point : points) {
+            if (this.point) 
             point.draw(g);
         }
         for (Line line : lines) {
-            // line.draw(g);
+            if (this.line)
+                line.draw(g);
         }
     }
 }
